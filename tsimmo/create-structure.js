@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { dirname } from 'path';
 
 const structure = [
   'src/app/api/auth/route.ts',
@@ -22,13 +22,13 @@ const structure = [
 ];
 
 structure.forEach(file => {
-  const dir = path.dirname(file);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+  const dir = dirname(file);
+  if (!existsSync(dir)) {
+    mkdirSync(dir, { recursive: true });
     console.log(`📁 Dossier créé : ${dir}`);
   }
-  if (!fs.existsSync(file)) {
-    fs.writeFileSync(file, '', 'utf8');
+  if (!existsSync(file)) {
+    writeFileSync(file, '', 'utf8');
     console.log(`📄 Fichier créé : ${file}`);
   }
 });
